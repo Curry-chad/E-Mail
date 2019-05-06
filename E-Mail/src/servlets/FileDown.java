@@ -50,51 +50,51 @@ public class FileDown extends HttpServlet {
 			e.printStackTrace();
 		}
         File file = new File(email.getFilepath());
-        //Èç¹ûÎÄ¼ş²»´æÔÚ
+        //å¦‚æœæ–‡ä»¶ä¸å­˜åœ¨
         if(!file.exists()){
         	request.setCharacterEncoding("utf-8");
-        	response.getWriter().println("<script type='text/javascript'>alert('ÄúÒªÏÂÔØµÄ×ÊÔ´±»É¾³ıÀ²£¡')</script>");
+        	response.getWriter().println("<script type='text/javascript'>alert('æ‚¨è¦ä¸‹è½½çš„èµ„æºè¢«åˆ é™¤å•¦ï¼')</script>");
         }
-        //´¦ÀíÎÄ¼şÃû
+        //å¤„ç†æ–‡ä»¶å
        // String realname = fileName.substring(fileName.indexOf("_")+1);
         String realname=email.getFilename();
-        //ÉèÖÃÏìÓ¦Í·£¬¿ØÖÆä¯ÀÀÆ÷ÏÂÔØ¸ÃÎÄ¼ş
+        //è®¾ç½®å“åº”å¤´ï¼Œæ§åˆ¶æµè§ˆå™¨ä¸‹è½½è¯¥æ–‡ä»¶
         response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realname, "UTF-8"));
-        //¶ÁÈ¡ÒªÏÂÔØµÄÎÄ¼ş£¬±£´æµ½ÎÄ¼şÊäÈëÁ÷
+        //è¯»å–è¦ä¸‹è½½çš„æ–‡ä»¶ï¼Œä¿å­˜åˆ°æ–‡ä»¶è¾“å…¥æµ
         FileInputStream in = new FileInputStream(email.getFilepath());
-        //´´½¨Êä³öÁ÷
+        //åˆ›å»ºè¾“å‡ºæµ
         OutputStream out = response.getOutputStream();
-        //´´½¨»º³åÇø
+        //åˆ›å»ºç¼“å†²åŒº
         byte buffer[] = new byte[1024];
         int len = 0;
-        //Ñ­»·½«ÊäÈëÁ÷ÖĞµÄÄÚÈİ¶ÁÈ¡µ½»º³åÇøµ±ÖĞ
+        //å¾ªç¯å°†è¾“å…¥æµä¸­çš„å†…å®¹è¯»å–åˆ°ç¼“å†²åŒºå½“ä¸­
         while((len=in.read(buffer))>0){
-            //Êä³ö»º³åÇøµÄÄÚÈİµ½ä¯ÀÀÆ÷£¬ÊµÏÖÎÄ¼şÏÂÔØ
+            //è¾“å‡ºç¼“å†²åŒºçš„å†…å®¹åˆ°æµè§ˆå™¨ï¼Œå®ç°æ–‡ä»¶ä¸‹è½½
             out.write(buffer, 0, len);
         }
-        //¹Ø±ÕÎÄ¼şÊäÈëÁ÷
+        //å…³é—­æ–‡ä»¶è¾“å…¥æµ
         in.close();
-        //¹Ø±ÕÊä³öÁ÷
+        //å…³é—­è¾“å‡ºæµ
         out.close();
     }
     
     /*
     * @Method: findFileSavePathByFileName
-    * @Description: Í¨¹ıÎÄ¼şÃûºÍ´æ´¢ÉÏ´«ÎÄ¼ş¸ùÄ¿Â¼ÕÒ³öÒªÏÂÔØµÄÎÄ¼şµÄËùÔÚÂ·¾¶
-    * @param filename ÒªÏÂÔØµÄÎÄ¼şÃû
-    * @param saveRootPath ÉÏ´«ÎÄ¼ş±£´æµÄ¸ùÄ¿Â¼£¬Ò²¾ÍÊÇ/WEB-INF/uploadÄ¿Â¼
-    * @return ÒªÏÂÔØµÄÎÄ¼şµÄ´æ´¢Ä¿Â¼
+    * @Description: é€šè¿‡æ–‡ä»¶åå’Œå­˜å‚¨ä¸Šä¼ æ–‡ä»¶æ ¹ç›®å½•æ‰¾å‡ºè¦ä¸‹è½½çš„æ–‡ä»¶çš„æ‰€åœ¨è·¯å¾„
+    * @param filename è¦ä¸‹è½½çš„æ–‡ä»¶å
+    * @param saveRootPath ä¸Šä¼ æ–‡ä»¶ä¿å­˜çš„æ ¹ç›®å½•ï¼Œä¹Ÿå°±æ˜¯/WEB-INF/uploadç›®å½•
+    * @return è¦ä¸‹è½½çš„æ–‡ä»¶çš„å­˜å‚¨ç›®å½•
     */
     public String findFileSavePathByFileName(String filename,String saveRootPath){
-    	//ÓÃÈÕÆÚµÃµ½ÎÄ¼şÃûµÄ
+    	//ç”¨æ—¥æœŸå¾—åˆ°æ–‡ä»¶åçš„
     	Calendar date=Calendar.getInstance();		 
  		SimpleDateFormat format1=new SimpleDateFormat( "yyyy-MM-dd"); 
  		String name=format1.format(date.getTime());
  		String dir = saveRootPath + "\\" + name;
  		File file=new File(dir);
- 		//Èç¹ûÄ¿Â¼²»´æÔÚ
+ 		//å¦‚æœç›®å½•ä¸å­˜åœ¨
         if(!file.exists()){
-            //´´½¨Ä¿Â¼
+            //åˆ›å»ºç›®å½•
             file.mkdirs();
         }
         return dir;

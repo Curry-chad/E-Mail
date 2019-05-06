@@ -38,17 +38,17 @@ public class UploadHandleServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//µÃµ½ÉÏ´«Ê±Éú³ÉµÄÁÙÊ±ÎÄ¼ş±£´æÄ¿Â¼
+		//å¾—åˆ°ä¸Šä¼ æ—¶ç”Ÿæˆçš„ä¸´æ—¶æ–‡ä»¶ä¿å­˜ç›®å½•
 		/**
-		 * µÃµ½ÉÏ´«ÎÄ¼şµÄ±£´æÄ¿Â¼µÄÁ½ÖÖ·½·¨
-		 * ·½·¨1µÄÄ¿Â¼Éú³ÉÔÚtomcatÄ¿Â¼ÏÂ£¬Ò»µ©tomcatÇå³ıÏîÄ¿£¬´ËÎÄ¼ş¾Í»áÏûÊ§£¬²»Îª¿¼ÂÇ
-		 *1¡¢String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
-		 *·½·¨2µÄAttFilePathÎ»webxmlÀïÃæÅäÖÃµÄÂ·¾¶Ãû³Æ£¬´ËÄ¿Â¼Îª¹Ì¶¨Ó²ÅÌÄ¿Â¼£¬²»»áÒòÎªÏîÄ¿ÒÆ³ı¶øÏûÊ§£¬ÎÈ¶¨¿É¿¿
-		 *2¡¢String savePath = this.getServletContext().getInitParameter("AttFilePath");
+		 * å¾—åˆ°ä¸Šä¼ æ–‡ä»¶çš„ä¿å­˜ç›®å½•çš„ä¸¤ç§æ–¹æ³•
+		 * æ–¹æ³•1çš„ç›®å½•ç”Ÿæˆåœ¨tomcatç›®å½•ä¸‹ï¼Œä¸€æ—¦tomcatæ¸…é™¤é¡¹ç›®ï¼Œæ­¤æ–‡ä»¶å°±ä¼šæ¶ˆå¤±ï¼Œä¸ä¸ºè€ƒè™‘
+		 *1ã€String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+		 *æ–¹æ³•2çš„AttFilePathä½webxmlé‡Œé¢é…ç½®çš„è·¯å¾„åç§°ï¼Œæ­¤ç›®å½•ä¸ºå›ºå®šç¡¬ç›˜ç›®å½•ï¼Œä¸ä¼šå› ä¸ºé¡¹ç›®ç§»é™¤è€Œæ¶ˆå¤±ï¼Œç¨³å®šå¯é 
+		 *2ã€String savePath = this.getServletContext().getInitParameter("AttFilePath");
 		 */		
-		//µÃµ½ÉÏ´«ÎÄ¼şµÄ±£´æÄ¿Â¼
+		//å¾—åˆ°ä¸Šä¼ æ–‡ä»¶çš„ä¿å­˜ç›®å½•
 		//String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
-		//µÃµ½ÉÏ´«ÎÄ¼şµÄ±£´æÄ¿Â¼
+		//å¾—åˆ°ä¸Šä¼ æ–‡ä»¶çš„ä¿å­˜ç›®å½•
 		String tempPath=this.getServletContext().getRealPath("/WEB-INF/temp");
 		String title="";
 		String addresser_id="";
@@ -61,39 +61,39 @@ public class UploadHandleServlet extends HttpServlet {
 		String filename="";
 		String type=request.getParameter("type");
 		File tmpFile=new File(tempPath);
-		//Èç¹ûÁÙÊ±ÎÄ¼ş²»´æÔÚ£¬´´½¨ÁÙÊ±Ä¿Â¼e
+		//å¦‚æœä¸´æ—¶æ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ›å»ºä¸´æ—¶ç›®å½•e
 		if(!tmpFile.exists()){
 			 tmpFile.mkdir();
 		}
         String message = "";
         try{
-		 //´´½¨Ò»¸öDiskFileItemFactory¹¤³§
+		 //åˆ›å»ºä¸€ä¸ªDiskFileItemFactoryå·¥å‚
 		DiskFileItemFactory factory=new DiskFileItemFactory();
-		//ÉèÖÃ»º³åÇøµÄ´óĞ¡Îª1000KB£¬Èç¹û²»Ö¸¶¨£¬ÄÇÃ´»º³åÇøµÄ´óĞ¡Ä¬ÈÏÊÇ10KB
+		//è®¾ç½®ç¼“å†²åŒºçš„å¤§å°ä¸º1000KBï¼Œå¦‚æœä¸æŒ‡å®šï¼Œé‚£ä¹ˆç¼“å†²åŒºçš„å¤§å°é»˜è®¤æ˜¯10KB
 		factory.setSizeThreshold(1024*100);
-		//ÉèÖÃÉÏ´«Ê±Éú³ÉµÄÁÙÊ±ÎÄ¼şµÄ±£´æÄ¿Â¼
+		//è®¾ç½®ä¸Šä¼ æ—¶ç”Ÿæˆçš„ä¸´æ—¶æ–‡ä»¶çš„ä¿å­˜ç›®å½•
 		factory.setRepository(tmpFile);
-		//´´½¨Ò»¸öÎÄ¼şÉÏ´«½âÎöÆ÷
+		//åˆ›å»ºä¸€ä¸ªæ–‡ä»¶ä¸Šä¼ è§£æå™¨
         ServletFileUpload upload = new ServletFileUpload(factory);
-        //¼àÌıÎÄ¼şÉÏ´«½ø¶È
+        //ç›‘å¬æ–‡ä»¶ä¸Šä¼ è¿›åº¦
         upload.setProgressListener(new ProgressListener(){
             public void update(long pBytesRead, long pContentLength, int arg2) {
-                //System.out.println("ÎÄ¼ş´óĞ¡Îª£º" + pContentLength + ",µ±Ç°ÒÑ´¦Àí£º" + pBytesRead);
+                //System.out.println("æ–‡ä»¶å¤§å°ä¸ºï¼š" + pContentLength + ",å½“å‰å·²å¤„ç†ï¼š" + pBytesRead);
             }
         });
         
-        //ÉèÖÃÉÏ´«µ¥¸öÎÄ¼şµÄ´óĞ¡µÄ×î´óÖµ£¬Ä¿Ç°ÊÇÉèÖÃÎª1024*1024×Ö½Ú£¬Ò²¾ÍÊÇ1MB
+        //è®¾ç½®ä¸Šä¼ å•ä¸ªæ–‡ä»¶çš„å¤§å°çš„æœ€å¤§å€¼ï¼Œç›®å‰æ˜¯è®¾ç½®ä¸º1024*1024å­—èŠ‚ï¼Œä¹Ÿå°±æ˜¯1MB
         upload.setFileSizeMax(1024*1024*10);
-        //ÉèÖÃÉÏ´«ÎÄ¼ş×ÜÁ¿µÄ×î´óÖµ£¬×î´óÖµ=Í¬Ê±ÉÏ´«µÄ¶à¸öÎÄ¼şµÄ´óĞ¡µÄ×î´óÖµµÄºÍ£¬Ä¿Ç°ÉèÖÃÎª10MB
+        //è®¾ç½®ä¸Šä¼ æ–‡ä»¶æ€»é‡çš„æœ€å¤§å€¼ï¼Œæœ€å¤§å€¼=åŒæ—¶ä¸Šä¼ çš„å¤šä¸ªæ–‡ä»¶çš„å¤§å°çš„æœ€å¤§å€¼çš„å’Œï¼Œç›®å‰è®¾ç½®ä¸º10MB
         upload.setSizeMax(1024*1024*20);
-        //4¡¢Ê¹ÓÃServletFileUpload½âÎöÆ÷½âÎöÉÏ´«Êı¾İ£¬½âÎö½á¹û·µ»ØµÄÊÇÒ»¸öList<FileItem>¼¯ºÏ£¬Ã¿Ò»¸öFileItem¶ÔÓ¦Ò»¸öForm±íµ¥µÄÊäÈëÏî
+        //4ã€ä½¿ç”¨ServletFileUploadè§£æå™¨è§£æä¸Šä¼ æ•°æ®ï¼Œè§£æç»“æœè¿”å›çš„æ˜¯ä¸€ä¸ªList<FileItem>é›†åˆï¼Œæ¯ä¸€ä¸ªFileItemå¯¹åº”ä¸€ä¸ªFormè¡¨å•çš„è¾“å…¥é¡¹
         List<FileItem> list = upload.parseRequest(request);
         upload.setHeaderEncoding("UTF-8"); 
         for(FileItem item : list){
-            //Èç¹ûfileitemÖĞ·â×°µÄÊÇÆÕÍ¨ÊäÈëÏîµÄÊı¾İ
+            //å¦‚æœfileitemä¸­å°è£…çš„æ˜¯æ™®é€šè¾“å…¥é¡¹çš„æ•°æ®
             if(item.isFormField()){
                 String name = item.getFieldName();
-                //½â¾öÆÕÍ¨ÊäÈëÏîµÄÊı¾İµÄÖĞÎÄÂÒÂëÎÊÌâ
+                //è§£å†³æ™®é€šè¾“å…¥é¡¹çš„æ•°æ®çš„ä¸­æ–‡ä¹±ç é—®é¢˜
                 String value = item.getString("UTF-8");
                 //value = new String(value.getBytes("iso8859-1"),"UTF-8");
                 System.out.println(name + "=" + value);
@@ -110,55 +110,55 @@ public class UploadHandleServlet extends HttpServlet {
                 	email_content=value;
                 }
             }else{
-                //µÃµ½ÉÏ´«µÄÎÄ¼şÃû³Æ£¬
+                //å¾—åˆ°ä¸Šä¼ çš„æ–‡ä»¶åç§°ï¼Œ
                 filename = item.getName();
                 System.out.println(filename);
                 if(filename==null || filename.trim().equals("")){
                 	
                 }
-                //½â¾öÉÏ´«ÎÄ¼şÃûµÄÖĞÎÄÂÒÂë
+                //è§£å†³ä¸Šä¼ æ–‡ä»¶åçš„ä¸­æ–‡ä¹±ç 
                 upload.setHeaderEncoding("UTF-8"); 
-                //×¢Òâ£º²»Í¬µÄä¯ÀÀÆ÷Ìá½»µÄÎÄ¼şÃûÊÇ²»Ò»ÑùµÄ£¬ÓĞĞ©ä¯ÀÀÆ÷Ìá½»ÉÏÀ´µÄÎÄ¼şÃûÊÇ´øÓĞÂ·¾¶µÄ£¬Èç£º  c:\a\b\1.txt£¬¶øÓĞĞ©Ö»ÊÇµ¥´¿µÄÎÄ¼şÃû£¬Èç£º1.txt
-                //´¦Àí»ñÈ¡µ½µÄÉÏ´«ÎÄ¼şµÄÎÄ¼şÃûµÄÂ·¾¶²¿·Ö£¬Ö»±£ÁôÎÄ¼şÃû²¿·Ö
+                //æ³¨æ„ï¼šä¸åŒçš„æµè§ˆå™¨æäº¤çš„æ–‡ä»¶åæ˜¯ä¸ä¸€æ ·çš„ï¼Œæœ‰äº›æµè§ˆå™¨æäº¤ä¸Šæ¥çš„æ–‡ä»¶åæ˜¯å¸¦æœ‰è·¯å¾„çš„ï¼Œå¦‚ï¼š  c:\a\b\1.txtï¼Œè€Œæœ‰äº›åªæ˜¯å•çº¯çš„æ–‡ä»¶åï¼Œå¦‚ï¼š1.txt
+                //å¤„ç†è·å–åˆ°çš„ä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶åçš„è·¯å¾„éƒ¨åˆ†ï¼Œåªä¿ç•™æ–‡ä»¶åéƒ¨åˆ†
                 filename = filename.substring(filename.lastIndexOf("\\")+1);
                 /**
-                 * ½«ÉÏ´«µÄÎÄ¼ş±£´æµ½Êı¾İ¿â
+                 * å°†ä¸Šä¼ çš„æ–‡ä»¶ä¿å­˜åˆ°æ•°æ®åº“
                  * @author baicai
-                 * timeÉÏ´«Ê±¼ä
-                 * filenameÎÄ¼şÃû
-                 * savePathÎÄ¼şÂ·¾¶
+                 * timeä¸Šä¼ æ—¶é—´
+                 * filenameæ–‡ä»¶å
+                 * savePathæ–‡ä»¶è·¯å¾„
                  * */
     			Date date=new Date();
     		    DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
     			time=format.format(date);
             	
-                //µÃµ½ÉÏ´«ÎÄ¼şµÄÀ©Õ¹Ãû
+                //å¾—åˆ°ä¸Šä¼ æ–‡ä»¶çš„æ‰©å±•å
                 String fileExtName = filename.substring(filename.lastIndexOf(".")+1);
-                //Èç¹ûĞèÒªÏŞÖÆÉÏ´«µÄÎÄ¼şÀàĞÍ£¬ÄÇÃ´¿ÉÒÔÍ¨¹ıÎÄ¼şµÄÀ©Õ¹ÃûÀ´ÅĞ¶ÏÉÏ´«µÄÎÄ¼şÀàĞÍÊÇ·ñºÏ·¨
-                System.out.println("ÉÏ´«µÄÎÄ¼şµÄÀ©Õ¹ÃûÊÇ£º"+fileExtName);
-                //»ñÈ¡itemÖĞµÄÉÏ´«ÎÄ¼şµÄÊäÈëÁ÷
+                //å¦‚æœéœ€è¦é™åˆ¶ä¸Šä¼ çš„æ–‡ä»¶ç±»å‹ï¼Œé‚£ä¹ˆå¯ä»¥é€šè¿‡æ–‡ä»¶çš„æ‰©å±•åæ¥åˆ¤æ–­ä¸Šä¼ çš„æ–‡ä»¶ç±»å‹æ˜¯å¦åˆæ³•
+                System.out.println("ä¸Šä¼ çš„æ–‡ä»¶çš„æ‰©å±•åæ˜¯ï¼š"+fileExtName);
+                //è·å–itemä¸­çš„ä¸Šä¼ æ–‡ä»¶çš„è¾“å…¥æµ
                 InputStream in = item.getInputStream();
-                //µÃµ½ÎÄ¼ş±£´æµÄÃû³Æ
+                //å¾—åˆ°æ–‡ä»¶ä¿å­˜çš„åç§°
                 saveFilename = makeFileName(title+"."+fileExtName);
-                //µÃµ½ÎÄ¼şµÄ±£´æÄ¿Â¼
+                //å¾—åˆ°æ–‡ä»¶çš„ä¿å­˜ç›®å½•
                realSavePath = makePath(saveFilename, savePath);
                 System.out.println(realSavePath+"\\"+saveFilename);
 
                 
-                //´´½¨Ò»¸öÎÄ¼şÊä³öÁ÷
+                //åˆ›å»ºä¸€ä¸ªæ–‡ä»¶è¾“å‡ºæµ
                 FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
-                //´´½¨Ò»¸ö»º³åÇø
+                //åˆ›å»ºä¸€ä¸ªç¼“å†²åŒº
                 byte buffer[] = new byte[1024];
-                //ÅĞ¶ÏÊäÈëÁ÷ÖĞµÄÊı¾İÊÇ·ñÒÑ¾­¶ÁÍêµÄ±êÊ¶
+                //åˆ¤æ–­è¾“å…¥æµä¸­çš„æ•°æ®æ˜¯å¦å·²ç»è¯»å®Œçš„æ ‡è¯†
                 int len = 0;
-                //Ñ­»·½«ÊäÈëÁ÷¶ÁÈëµ½»º³åÇøµ±ÖĞ£¬(len=in.read(buffer))>0¾Í±íÊ¾inÀïÃæ»¹ÓĞÊı¾İ
+                //å¾ªç¯å°†è¾“å…¥æµè¯»å…¥åˆ°ç¼“å†²åŒºå½“ä¸­ï¼Œ(len=in.read(buffer))>0å°±è¡¨ç¤ºiné‡Œé¢è¿˜æœ‰æ•°æ®
                 while((len=in.read(buffer))>0){
-                    //Ê¹ÓÃFileOutputStreamÊä³öÁ÷½«»º³åÇøµÄÊı¾İĞ´Èëµ½Ö¸¶¨µÄÄ¿Â¼(savePath + "\\" + filename)µ±ÖĞ
+                    //ä½¿ç”¨FileOutputStreamè¾“å‡ºæµå°†ç¼“å†²åŒºçš„æ•°æ®å†™å…¥åˆ°æŒ‡å®šçš„ç›®å½•(savePath + "\\" + filename)å½“ä¸­
                     out.write(buffer, 0, len);
                 }
-                //¹Ø±ÕÊäÈëÁ÷
+                //å…³é—­è¾“å…¥æµ
                 in.close();
-                //¹Ø±ÕÊä³öÁ÷
+                //å…³é—­è¾“å‡ºæµ
                 out.close();
                 
             }
@@ -167,14 +167,14 @@ public class UploadHandleServlet extends HttpServlet {
         System.out.println("upload:"+email_content);
     	Email email=new Email(userid,addresser_id,title,0,realSavePath+"\\"+saveFilename,time,email_content,filename);
     	fileDao.UpFile(email,type);
-        //É¾³ı´¦ÀíÎÄ¼şÉÏ´«Ê±Éú³ÉµÄÁÙÊ±ÎÄ¼ş
+        //åˆ é™¤å¤„ç†æ–‡ä»¶ä¸Šä¼ æ—¶ç”Ÿæˆçš„ä¸´æ—¶æ–‡ä»¶
         //item.delete();
 //    	 request.setAttribute("userid", userid);
     	 response.sendRedirect("http://localhost:8080/springmvc/user/outbox.do");
         }
         catch (FileUploadBase.FileSizeLimitExceededException e) {
 	        e.printStackTrace();
-	        request.setAttribute("message", "µ¥¸öÎÄ¼ş³¬³ö×î´óÖµ!!!");
+	        request.setAttribute("message", "å•ä¸ªæ–‡ä»¶è¶…å‡ºæœ€å¤§å€¼!!!");
 	        response.sendRedirect("http://localhost:8080/springmvc/user/inbox.do");
 	        return;
 	    }catch (FileUploadBase.SizeLimitExceededException e) {
@@ -192,34 +192,34 @@ public class UploadHandleServlet extends HttpServlet {
 }
 	 /**
 	    * @Method: makeFileName
-	    * @Description: Éú³ÉÉÏ´«ÎÄ¼şµÄÎÄ¼şÃû£¬ÎÄ¼şÃûÒÔ£ºuuid+"_"+ÎÄ¼şµÄÔ­Ê¼Ãû³Æ
-	    * @param filename ÎÄ¼şµÄÔ­Ê¼Ãû³Æ
-	    * @return uuid+"_"+ÎÄ¼şµÄÔ­Ê¼Ãû³Æ
+	    * @Description: ç”Ÿæˆä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶åï¼Œæ–‡ä»¶åä»¥ï¼šuuid+"_"+æ–‡ä»¶çš„åŸå§‹åç§°
+	    * @param filename æ–‡ä»¶çš„åŸå§‹åç§°
+	    * @return uuid+"_"+æ–‡ä»¶çš„åŸå§‹åç§°
 	    */ 
 	    private String makeFileName(String filename){  //2.jpg
-	        //Îª·ÀÖ¹ÎÄ¼ş¸²¸ÇµÄÏÖÏó·¢Éú£¬ÒªÎªÉÏ´«ÎÄ¼ş²úÉúÒ»¸öÎ¨Ò»µÄÎÄ¼şÃû
+	        //ä¸ºé˜²æ­¢æ–‡ä»¶è¦†ç›–çš„ç°è±¡å‘ç”Ÿï¼Œè¦ä¸ºä¸Šä¼ æ–‡ä»¶äº§ç”Ÿä¸€ä¸ªå”¯ä¸€çš„æ–‡ä»¶å
 	        return UUID.randomUUID().toString() + "_" + filename;
 	    }
 	    
 	    /**
-	     * Îª·ÀÖ¹Ò»¸öÄ¿Â¼ÏÂÃæ³öÏÖÌ«¶àÎÄ¼ş£¬ÒªÊ¹ÓÃhashËã·¨´òÉ¢´æ´¢
+	     * ä¸ºé˜²æ­¢ä¸€ä¸ªç›®å½•ä¸‹é¢å‡ºç°å¤ªå¤šæ–‡ä»¶ï¼Œè¦ä½¿ç”¨hashç®—æ³•æ‰“æ•£å­˜å‚¨
 	    * @Method: makePath
 	    * @Description:
 	    *
-	    * @param filename ÎÄ¼şÃû£¬Òª¸ù¾İÎÄ¼şÃûÉú³É´æ´¢Ä¿Â¼
-	    * @param savePath ÎÄ¼ş´æ´¢Â·¾¶
-	    * @return ĞÂµÄ´æ´¢Ä¿Â¼
+	    * @param filename æ–‡ä»¶åï¼Œè¦æ ¹æ®æ–‡ä»¶åç”Ÿæˆå­˜å‚¨ç›®å½•
+	    * @param savePath æ–‡ä»¶å­˜å‚¨è·¯å¾„
+	    * @return æ–°çš„å­˜å‚¨ç›®å½•
 	    */ 
 	    private String makePath(String filename,String savePath){	    	
-	    	//ÓÃÈÕÆÚµÃµ½ÎÄ¼şÃûµÄ
+	    	//ç”¨æ—¥æœŸå¾—åˆ°æ–‡ä»¶åçš„
 	    	Calendar date=Calendar.getInstance();		 
 	 		SimpleDateFormat format1=new SimpleDateFormat( "yyyy-MM-dd"); 
 	 		String name=format1.format(date.getTime());
 	 		String dir = savePath + "\\" + name;  //upload\2\3  upload\3\5
 	 		File file=new File(dir);
-	 		//Èç¹ûÄ¿Â¼²»´æÔÚ
+	 		//å¦‚æœç›®å½•ä¸å­˜åœ¨
 	        if(!file.exists()){
-	            //´´½¨Ä¿Â¼
+	            //åˆ›å»ºç›®å½•
 	            file.mkdirs();
 	        }
 	        return dir;

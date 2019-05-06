@@ -15,7 +15,7 @@ public class EmailDao {
     Connection conn = dao.getConnection();
     Email email;
 	/**
-	 * 上传文件
+	 * 涓婁紶鏂囦欢
 	 * */
 	public void UpFile(Email email,String type) throws SQLException{
 		String sql="";
@@ -36,7 +36,7 @@ public class EmailDao {
 		ptmt.executeUpdate();
 	}
 	/**
-	 *下载查看文件 
+	 *涓嬭浇鏌ョ湅鏂囦欢 
 	 * */
 	public Email Findfile(int id) throws SQLException{
 		String sql="select * from email where id='"+id+"'";
